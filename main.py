@@ -13,8 +13,14 @@ driver.implicitly_wait(10)
 driver.find_element(By.ID, 'continue').click()
 driver.find_element(By.XPATH, "//input[@id='ap_password']").send_keys("Loki@1234")
 driver.find_element(By.ID, "auth-signin-button").click()
-driver.find_element(By.XPATH, "//span[normalize-space()='Cart']").click()
-cart_items = driver.find_elements(By.XPATH, "//form[@id='activeCartViewForm']/div[@data-name='Active Items']/div")
-for i in cart_items:
-    name = i.find_element(By.XPATH, "div[@class='sc-list-item-content']/div/div[@class='sc-item-content-group']/ul/li/span/a/span/span")
-    print(name.text)
+driver.find_element(By.XPATH, "//div/a[@id='icp-nav-flyout']/span/span[@class='nav-line-2']/span[@class='nav-icon nav-arrow']").click()
+languages = driver.find_elements(By.XPATH, "//div[@class='a-column a-span7']/div[@class='a-row a-spacing-mini']")
+for i in languages:
+    if "EN" in i.text:
+        i.click()
+driver.find_element(By.XPATH, "//input[@aria-labelledby='icp-save-button-announce']").click()
+time.sleep(10)
+driver.refresh()
+time.sleep(20)
+a = driver.find_element(By.XPATH, "//div/a[@id='icp-nav-flyout']/span/span[@class='nav-line-2']").text
+print(a)
